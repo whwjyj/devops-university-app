@@ -37,9 +37,9 @@ pipeline {
                 sh 'ls -al'
                 sh 'mvn -v'
                 // sh 'mvn clean'
-                // sh 'mvn package'
-                // sh 'ls -al'
-                // sh 'ls -al ./target'
+                sh 'mvn package --DskipTests'
+                sh 'ls -al'
+                sh 'ls -al ./target'
                 }
             }
         }
@@ -48,6 +48,7 @@ pipeline {
             steps{
                 container('docker'){
                     sh 'docker -v'
+                    sh 'docker build --no-cache -t whwjyj/department-service:5.0'./
                     sh 'docker images whwjyj/department-service'
                 }
             }
