@@ -20,9 +20,12 @@ pipeline {
     stages {
         stage('Maven Build') {
             steps {
+                container('maven'){
                 sh 'pwd'
                 sh 'ls -al'
+                sh 'mvn -v'
                 sh 'mvn clean'
+                }
             }
         }
     }
