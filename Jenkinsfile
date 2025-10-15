@@ -44,12 +44,27 @@ pipeline {
             }
         }
 
+        environment{
+            DOCKER_IMAGES_NAME = 'whwjyj/department-service'
+                }
+        }
+
         stage('Docker Image build & Push'){
             steps{
                 container('docker'){
-                    sh 'docker -v'
-                    sh 'docker build --no-cache -t whwjyj/department-service:5.0'./
-                    sh 'docker images whwjyj/department-service'
+                    script{
+                        def buildNumber = "${env.BUILD_NUMBER}"
+
+                        // 파이프라인 단계에서 환경 변수를 설정하는 역할을 한다.
+                        withEnv(["DOCKER_IMAGE_VERSION=${buildNumber}"]){
+                            sh 'docker -v'
+                            sh 'echo $DOCKER_IMAGE_NAME'
+                            sh 'echo $DOCKER_IMAGE_VERSION'
+                        //     sh 'docker images whwjyj/department-service'
+                        //     sh 'docker build --no-cache -t whwjyj/department-service:5.0'./
+                        //     sh 'docker images whwjyj/department-service'
+                        // }
+                    }
                 }
             }
         }
