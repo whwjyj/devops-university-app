@@ -1,0 +1,10 @@
+server:
+  port: 8088
+logging:
+  level:
+    '[org.springframework.web]': debug
+    '[org.springframework.security]': debug
+    '[org.mybatis]': debug
+    '[org.mariadb.jdbc.client.impl]': debug
+    '[org.springframework.data.redis]': debug
+    '[io.lettuce.core]': debug

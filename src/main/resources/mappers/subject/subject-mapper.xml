@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+
+<mapper namespace="com.beyond.university.subject.model.mapper.SubjectMapper">
+    <resultMap id="subjectResultMap" type="Subject">
+        <id property="no" column="subject_no" />
+        <result property="deptNo" column="department_no" />
+        <result property="preattendingNo" column="preattending_subject_no" />
+        <result property="name" column="subject_name" />
+        <result property="type" column="subject_type" />
+    </resultMap>
+
+    <select id="selectCountByDeptNo" parameterType="string" resultType="_int">
+        SELECT COUNT(*)
+        FROM subject
+        WHERE department_no = #{deptNo}
+    </select>
+
+    <select id="selectAllByDeptNo" parameterType="string" resultMap="subjectResultMap">
+        SELECT subject_no,
+               department_no,
+               preattending_subject_no,
+               subject_name,
+               subject_type
+        FROM subject
+        WHERE department_no = #{deptNo}
+        ORDER BY subject_name ASC
+    </select>
+</mapper>
