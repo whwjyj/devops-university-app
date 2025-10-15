@@ -2,9 +2,10 @@ pipeline {
     agent any
 
     stages {
-        stage('Hello') {
+        stage('checkout') {
             steps {
-                echo 'Hello World'
+                sh 'pqd'
+                sh 'ls -al'
             }
         }
     }
