@@ -48,6 +48,7 @@ pipeline {
             steps{
                 container('docker'){
                     sh 'docker -v'
+                    sh 'docker images whwjyj/department-service'
                 }
             }
         }
