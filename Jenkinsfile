@@ -2,10 +2,11 @@ pipeline {
     agent any
 
     stages {
-        stage('checkout') {
+        stage('Maven Build') {
             steps {
-                sh 'pqd'
+                sh 'pwd'
                 sh 'ls -al'
+                sh 'mvn clean'
             }
         }
     }
