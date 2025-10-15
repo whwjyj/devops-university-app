@@ -13,6 +13,18 @@ pipeline {
                 command:
                 - cat
                 tty: true
+              - name: docker
+                image: docker:28.5.1-cli-alpine3.22
+                command:
+                - cat
+                tty: true
+                volumeMounts:
+                - mountPath: "/var/run/docker.sock"
+                  name: docker-socket
+              volumes:
+              - name: docker-socket
+                hostPath:
+                  path: "/var/run/docker.sock"
             '''
         }
     }
@@ -34,7 +46,9 @@ pipeline {
 
         stage('Docker Image build & Push'){
             steps{
-                sh 'docker -v'
+                container('docker'){
+                    sh 'docker -v'
+                }
             }
         }
     }
